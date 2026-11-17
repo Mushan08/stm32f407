@@ -1,0 +1,24 @@
+build/
+build-release/
+cmake-build-*/
+_hal_cache/
+*.map
+.idea/workspace.xml
+.idea/tasks.xml
+__pycache__/
+*.pyc
+
+# ?????: python _tools/build_exe.py
+f407.exe
+
+# CLion ??????????????????
+Core/Src/.idea/
+
+# 文档仅本地，不上传
+*.md
+# 工具链 1.4GB，本机自带
+toolchain/
+# IDE 配置
+.idea/
+# 备份/临时
+*.bak
