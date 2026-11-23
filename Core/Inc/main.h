@@ -19,6 +19,11 @@ extern "C" {
 #define LED_ON(pin)           HAL_GPIO_WritePin(LED_GPIO_PORT, (pin), GPIO_PIN_RESET)
 #define LED_OFF(pin)          HAL_GPIO_WritePin(LED_GPIO_PORT, (pin), GPIO_PIN_SET)
 
+/* 板载按键 SW3 = PA0：外部 10k 下拉，按下接 3V3（读 1） */
+#define BUTTON_GPIO_CLK_ENABLE() __HAL_RCC_GPIOA_CLK_ENABLE()
+#define BUTTON_GPIO_PORT         GPIOA
+#define BUTTON_PIN               GPIO_PIN_0
+
 void Error_Handler(void);
 
 #ifdef __cplusplus

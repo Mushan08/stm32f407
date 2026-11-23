@@ -1,3 +1,12 @@
 @echo off
-cd /d "%~dp0..\.."
-start "CLion" "C:\Program Files\JetBrains\CLion 2026.2\bin\clion64.exe" "%~dp0..\.."
+chcp 936 >nul
+set "ROOT=%~dp0..\.."
+cd /d "%ROOT%"
+if not exist "%ROOT%\f407.exe" (
+  echo [失败] 找不到 f407.exe，先生成：python _tools\build_exe.py
+  pause
+  exit /b 1
+)
+"%ROOT%\f407.exe" open %*
+if errorlevel 1 pause
+exit /b %errorlevel%

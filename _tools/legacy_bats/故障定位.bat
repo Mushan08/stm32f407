@@ -1,10 +1,12 @@
 @echo off
 chcp 936 >nul
-cd /d "%~dp0..\.."
-title F407 HardFault 取证
-echo [HardFault 取证] 免 halt 读 g_fault_capture + addr2line 直出崩溃源码行
-echo   前提: 板子全灯急闪中、还没按复位（复位/断电=现场清零）
-echo.
-python -I _tools\fault.py
-echo.
-pause
+set "ROOT=%~dp0..\.."
+cd /d "%ROOT%"
+if not exist "%ROOT%\f407.exe" (
+  echo [失败] 找不到 f407.exe，先生成：python _tools\build_exe.py
+  pause
+  exit /b 1
+)
+"%ROOT%\f407.exe" fault %*
+if errorlevel 1 pause
+exit /b %errorlevel%

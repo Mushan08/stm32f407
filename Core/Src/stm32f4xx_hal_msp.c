@@ -36,3 +36,14 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *huart)
         HAL_GPIO_DeInit(GPIOA, GPIO_PIN_9 | GPIO_PIN_10);
     }
 }
+
+/* 软件 PWM 时基：TIM6 20kHz 更新中断 */
+void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
+{
+    if (htim->Instance == TIM6)
+    {
+        __HAL_RCC_TIM6_CLK_ENABLE();
+        HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 5, 0);
+        HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
+    }
+}

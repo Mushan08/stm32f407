@@ -130,7 +130,8 @@ int _gettimeofday(struct timeval *tv, void *tzp)
 ssize_t _write(int fd, const void *buf, size_t len)
 {
     (void)fd;
-    (void)buf;
+    extern UART_HandleTypeDef huart1;
+    HAL_UART_Transmit(&huart1, (uint8_t *)buf, (uint16_t)len, 0xFFFF);
     return (ssize_t)len;
 }
 
